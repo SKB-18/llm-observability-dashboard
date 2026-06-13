@@ -9,6 +9,7 @@ from typing import List, Optional
 from fastapi import APIRouter, Depends, Query
 from sqlalchemy.orm import Session
 
+from backend.cache import cache_get, cache_set
 from backend.database import get_db
 from backend.utils.metrics_queries import (
     query_summary,
@@ -40,9 +41,15 @@ def get_summary(
     end_date: Optional[str] = Query(None),
     db: Session = Depends(get_db),
 ):
-    """Aggregate summary for a time period."""
+    """Aggregate summary for a time period (cached 30 s)."""
+    cache_key = f"metrics:summary:{start_date}:{end_date}"
+    cached = cache_get(cache_key)
+    if cached is not None:
+        return cached
     start, end = _parse_dates(start_date, end_date)
-    return query_summary(db, start, end)
+    result = query_summary(db, start, end)
+    cache_set(cache_key, result, ttl=30)
+    return result
 
 
 @router.get("/by-model")
