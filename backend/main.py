@@ -34,7 +34,6 @@ logger = get_logger(__name__)
 async def lifespan(app: FastAPI):
     logger.info("Starting up – creating tables if needed…")
     create_tables()
-    setup_telemetry(app)
     logger.info("App started on http://%s:%s", settings.API_HOST, settings.API_PORT)
     yield
     logger.info("Shutting down – closing database connections.")
@@ -49,6 +48,9 @@ app = FastAPI(
     version="1.0.0",
     lifespan=lifespan,
 )
+
+# OTEL must be wired before the app starts (before any middleware is locked in)
+setup_telemetry(app)
 
 # CORS
 app.add_middleware(
