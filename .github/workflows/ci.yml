@@ -32,7 +32,8 @@ jobs:
           pip install -r backend/requirements.txt
           pip install -r requirements.txt
           pip install "bcrypt==4.0.1" "email-validator" \
-                      "opentelemetry-instrumentation-fastapi"
+                      "opentelemetry-instrumentation-fastapi" \
+                      "responses>=0.24.0"
 
       - name: Lint (flake8)
         run: |
