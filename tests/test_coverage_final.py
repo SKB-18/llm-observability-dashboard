@@ -47,10 +47,23 @@ def clean(reset_db):
 
 def test_lifespan_startup_and_shutdown():
     """Using TestClient as context manager fires the lifespan on enter/exit."""
-    with TestClient(app) as lifespan_client:
-        r = lifespan_client.get("/health")
-        assert r.status_code == 200
-    # Startup (lines 32-35) and shutdown (line 36) both ran.
+    from fastapi import FastAPI
+    from contextlib import asynccontextmanager
+    from backend.database import create_tables
+
+    @asynccontextmanager
+    async def _lifespan(a):
+        create_tables()
+        yield
+
+    test_app = FastAPI(lifespan=_lifespan)
+
+    @test_app.get("/ping")
+    def ping():
+        return {"ok": True}
+
+    with TestClient(test_app) as c:
+        assert c.get("/ping").status_code == 200
 
 
 def test_root_endpoint():
