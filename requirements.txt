@@ -1,0 +1,19 @@
+# Root-level requirements (includes all backend deps for convenience)
+fastapi==0.104.0
+uvicorn==0.24.0
+sqlalchemy==2.0.23
+psycopg2-binary==2.9.9
+pydantic==2.4.0
+pydantic-settings==2.0.3
+python-dotenv==1.0.0
+pytest==7.4.3
+pytest-asyncio==0.21.1
+httpx==0.25.0
+anthropic==0.7.1
+
+# Code quality
+black==23.12.0
+flake8==6.1.0
+isort==5.13.2
+mypy==1.7.1
+pytest-cov==4.1.0

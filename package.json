@@ -1,0 +1,16 @@
+{
+  "name": "llm-observability-dashboard",
+  "version": "0.1.0",
+  "description": "Comprehensive observability platform for Large Language Models",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "cd frontend && vite",
+    "build": "cd frontend && vite build",
+    "preview": "cd frontend && vite preview",
+    "lint": "eslint frontend/src",
+    "format": "prettier --write frontend/src"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

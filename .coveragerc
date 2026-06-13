@@ -1,0 +1,26 @@
+[run]
+source = backend, sdk
+omit =
+    # CLI scripts – not application logic, not testable as units
+    backend/seed_data.py
+    backend/seed_all.py
+    backend/generate_evals_dataset.py
+    backend/migrations/runner.py
+    # Package scaffolding
+    sdk/setup.py
+    sdk/__init__.py
+    # Test infrastructure
+    tests/*
+    backend/tests/*
+    conftest.py
+    */__pycache__/*
+
+[report]
+exclude_lines =
+    # Standard non-executable patterns
+    pragma: no cover
+    def __repr__
+    if __name__ == .__main__.:
+    raise NotImplementedError
+    pass
+    \.\.\.
