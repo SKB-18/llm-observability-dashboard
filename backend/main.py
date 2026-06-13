@@ -11,6 +11,7 @@ from fastapi.exceptions import RequestValidationError
 
 from backend.config import settings
 from backend.database import create_tables
+from backend.telemetry import setup_telemetry
 from backend.utils.logging_config import setup_logging, get_logger
 from backend.utils.helpers import generate_request_id
 from backend.routes import logs as logs_router
@@ -33,6 +34,7 @@ logger = get_logger(__name__)
 async def lifespan(app: FastAPI):
     logger.info("Starting up – creating tables if needed…")
     create_tables()
+    setup_telemetry(app)
     logger.info("App started on http://%s:%s", settings.API_HOST, settings.API_PORT)
     yield
     logger.info("Shutting down – closing database connections.")
