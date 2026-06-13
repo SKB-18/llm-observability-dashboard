@@ -1,0 +1,17 @@
+{
+  "name": "llm-obs-e2e",
+  "version": "1.0.0",
+  "description": "Playwright cross-browser E2E tests for LLM Observability Dashboard",
+  "scripts": {
+    "test": "playwright test",
+    "test:chromium": "playwright test --project=chromium",
+    "test:firefox": "playwright test --project=firefox",
+    "test:webkit": "playwright test --project=webkit",
+    "test:mobile": "playwright test --project=mobile-chrome",
+    "test:ui": "playwright test --ui",
+    "install:browsers": "playwright install --with-deps"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.40.0"
+  }
+}
