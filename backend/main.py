@@ -17,6 +17,7 @@ from backend.routes import logs as logs_router
 from backend.routes import metrics as metrics_router
 from backend.routes import evals as evals_router
 from backend.routes import upload as upload_router
+from backend.routes import auth as auth_router
 
 # ---------------------------------------------------------------------------
 # Logging – initialised before anything else
@@ -135,6 +136,7 @@ app.include_router(logs_router.router)
 app.include_router(metrics_router.router)
 app.include_router(evals_router.router)
 app.include_router(upload_router.router)
+app.include_router(auth_router.router)
 
 
 if __name__ == "__main__":
